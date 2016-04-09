@@ -76,7 +76,7 @@ const scrollingAnchors = new ScrollingAnchors({
 
 #### Методы
 1. super.on(event, handler) - Подписка на событие (метод класса). Первый аргумент event тип строка 
-в формате: "имя_события:[anchors|ranges]:имя_диапазона_или_анкора". Второй аргумент функция.
+в формате: "имяСобытия:[anchors|ranges]:имяДиапазонаИлиАнкора". Второй аргумент функция.
 ```
 	scrollingAnchors.on("onTheScreen:ranges:Equipment-Characteristics", function() {
 		console.log("Equipment-Characteristics Ranges on Screen!");
