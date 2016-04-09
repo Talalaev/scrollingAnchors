@@ -101,15 +101,33 @@ var plugins =
 
 	var MyNewModule = __webpack_require__(1);
 	var myModule = new MyNewModule({
-		anchors: anchors
+		ranges: ranges
 	});
 
-	myModule.on("onTheScreen:anchors:Equipment", function () {
-		console.log("Last Anchor on Screen!");
+	/*
+ myModule.on("onTheScreen:anchors:Equipment", function() {
+ 	console.log("Last Anchor on Screen!");
+ });
+ */
+
+	myModule.on("onTheScreen:ranges:Equipment-Characteristics", function () {
+		console.log("Equipment-Characteristics Ranges on Screen!");
+	});
+
+	myModule.on("notOnTheScreen:ranges:Equipment-Characteristics", function () {
+		console.log("Equipment-Characteristics Ranges NOT on Screen!");
+	});
+
+	myModule.on("top:ranges:Equipment-Characteristics", function () {
+		console.log("Equipment-Characteristics Ranges Top!");
+	});
+
+	myModule.on("mostNotable:ranges:Equipment-Characteristics", function () {
+		console.log("Equipment-Characteristics Ranges is most Notable!");
 	});
 
 	myModule.addListeners(function (data) {
-		console.log(data.anchors);
+		console.log(data.mostNotableIndex);
 	});
 
 	exports.myModule = myModule;
@@ -170,9 +188,9 @@ var plugins =
 							top: $(item.range[0]).offset().top,
 							bottom: $(item.range[1]).offset().top
 						};
-						_this2.onScreen = null;
-						_this2.position = null; // top bottom middle cover
-						_this2.isMostNotable = false;
+						_this2.onScreen = undefined;
+						_this2.position = undefined; // top bottom middle cover
+						_this2.isMostNotable = undefined;
 						_this2.visiblePart = 0;
 						return _this2;
 					}
@@ -196,6 +214,7 @@ var plugins =
 					}return table;
 				}()
 			};
+			var currentState = {};
 
 			$(parent).on("scroll", onScrollParent);
 
@@ -222,10 +241,17 @@ var plugins =
 					var saveSize = 0;
 
 					for (var i = 0; i < ranges.length; i++) {
+						currentState.onScreen = ranges[i].onScreen;
+						currentState.position = ranges[i].position;
+
 						ranges[i].onScreen = false;
 
-						if (ranges[i].coords.top > $(parent).scrollTop() + $(parent).height()) ranges[i].position = "bottom";
-						if (ranges[i].coords.bottom < $(parent).scrollTop()) ranges[i].position = "top";
+						if (ranges[i].coords.top > $(parent).scrollTop() + $(parent).height()) {
+							ranges[i].position = "bottom";
+						}
+						if (ranges[i].coords.bottom < $(parent).scrollTop()) {
+							ranges[i].position = "top";
+						}
 						if (ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.bottom) && !ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.top)) {
 							ranges[i].position = "top";
 							ranges[i].onScreen = true;
@@ -246,17 +272,54 @@ var plugins =
 							ranges[i].onScreen = true;
 							ranges[i].visiblePart = $(parent).scrollTop() + $(parent).height() - ranges[i].coords.top;
 						}
+
+						// emit events
+						if (currentState.onScreen === undefined) {
+							if (ranges[i].onScreen) {
+								ranges[i].emit("onTheScreen");
+							} else {
+								ranges[i].emit("notOnTheScreen");
+							}
+						} else if (currentState.onScreen !== ranges[i].onScreen) {
+							if (ranges[i].onScreen) {
+								ranges[i].emit("onTheScreen");
+							} else {
+								ranges[i].emit("notOnTheScreen");
+							}
+						}
+
+						if (currentState.position === undefined) {
+							ranges[i].emit(ranges[i].position);
+						} else if (currentState.position !== ranges[i].position) {
+							ranges[i].emit(ranges[i].position);
+						}
 					}
 
 					for (var i = 0; i < ranges.length; i++) {
+						currentState.isMostNotable = ranges[i].isMostNotable;
 						ranges[i].isMostNotable = false;
 
 						if (saveSize < ranges[i].visiblePart) {
 							saveSize = ranges[i].visiblePart;
 							mostNotableIndex = i;
+							ranges[mostNotableIndex].isMostNotable = true;
+						}
+
+						// emit event
+						if (currentState.isMostNotable === undefined) {
+							if (ranges[i].isMostNotable) {
+								ranges[i].emit("mostNotable");
+							} else {
+								ranges[i].emit("notMostNotable");
+							}
+						} else if (currentState.isMostNotable !== ranges[i].isMostNotable) {
+							if (ranges[i].isMostNotable) {
+								ranges[i].emit("mostNotable");
+							} else {
+								ranges[i].emit("notMostNotable");
+							}
 						}
 					}
-					ranges[mostNotableIndex].isMostNotable = true;
 
 					// RANGES
 				}
@@ -301,6 +364,9 @@ var plugins =
 
 					return true;
 				} catch (e) {
+					console.log(event);
+					console.log(label);
+					console.log(which);
 					console.log(e);
 					console.log("parse error. maybe incorrectly stated the name");
 				}

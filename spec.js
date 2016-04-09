@@ -58,15 +58,33 @@ var ranges = [
 	
 const MyNewModule = require('./index.js');
 const myModule = new MyNewModule({
-	anchors
+	ranges
 });
 
+/*
 myModule.on("onTheScreen:anchors:Equipment", function() {
 	console.log("Last Anchor on Screen!");
 });
+*/
+
+myModule.on("onTheScreen:ranges:Equipment-Characteristics", function() {
+	console.log("Equipment-Characteristics Ranges on Screen!");
+});
+
+myModule.on("notOnTheScreen:ranges:Equipment-Characteristics", function() {
+	console.log("Equipment-Characteristics Ranges NOT on Screen!");
+});
+
+myModule.on("top:ranges:Equipment-Characteristics", function() {
+	console.log("Equipment-Characteristics Ranges Top!");
+});
+
+myModule.on("mostNotable:ranges:Equipment-Characteristics", function() {
+	console.log("Equipment-Characteristics Ranges is most Notable!");
+});
 
 myModule.addListeners( ( data ) => {
-	console.log( data.anchors );
+	console.log( data.mostNotableIndex );
 });
 
 exports.myModule = myModule;

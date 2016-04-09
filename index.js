@@ -28,9 +28,9 @@ class ScrollingAnchors {
 						top:		$(item.range[0]).offset().top,
 						bottom:		$(item.range[1]).offset().top
 					};
-					this.onScreen = null;
-					this.position = null; // top bottom middle cover
-					this.isMostNotable = false;
+					this.onScreen = undefined;
+					this.position = undefined; // top bottom middle cover
+					this.isMostNotable = undefined;
 					this.visiblePart = 0;
 				}
 			});
@@ -51,6 +51,7 @@ class ScrollingAnchors {
 				return table;
 			})()
 		};
+		var currentState = {};
 		
 		
 		$(parent)
@@ -85,12 +86,17 @@ class ScrollingAnchors {
 				var saveSize 			= 0;
 				
 				for(var i = 0; i < ranges.length; i++) {
+					currentState.onScreen = ranges[i].onScreen;
+					currentState.position = ranges[i].position;
+					
 					ranges[i].onScreen = false;
 					
-					if ( ranges[i].coords.top > ($(parent).scrollTop() + $(parent).height()) )
+					if ( ranges[i].coords.top > ($(parent).scrollTop() + $(parent).height()) ) {
 						ranges[i].position = "bottom";
-					if ( ranges[i].coords.bottom < $(parent).scrollTop() )
+					}
+					if ( ranges[i].coords.bottom < $(parent).scrollTop() ) {
 						ranges[i].position = "top";
+					}
 					if( ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.bottom) && !ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.top) ) {
 						ranges[i].position = "top";
 						ranges[i].onScreen = true;
@@ -112,17 +118,60 @@ class ScrollingAnchors {
 						ranges[i].visiblePart = ($(parent).scrollTop() + $(parent).height()) - ranges[i].coords.top;
 					}
 					
+					
+					// emit events
+					if ( currentState.onScreen === undefined ) {
+						if ( ranges[i].onScreen ) {
+							ranges[i].emit("onTheScreen");
+						} else {
+							ranges[i].emit("notOnTheScreen");
+						}
+					} else
+					if ( currentState.onScreen !== ranges[i].onScreen ) {
+						if ( ranges[i].onScreen ) {
+							ranges[i].emit("onTheScreen");
+						} else {
+							ranges[i].emit("notOnTheScreen");
+						}
+					}
+					
+					if ( currentState.position === undefined ) {
+						ranges[i].emit( ranges[i].position );
+					} else
+					if ( currentState.position !== ranges[i].position ) {
+						ranges[i].emit( ranges[i].position );
+					}
+						
 				}
 				
 				for ( var i = 0; i < ranges.length; i++ ) {
+					currentState.isMostNotable = ranges[i].isMostNotable;
 					ranges[i].isMostNotable = false;
 					
-					if(saveSize < ranges[i].visiblePart) {
+					if ( saveSize < ranges[i].visiblePart ) {
 						saveSize = ranges[i].visiblePart;
 						mostNotableIndex = i;
+						ranges[mostNotableIndex].isMostNotable = true;
 					}
+					
+					// emit event
+					if ( currentState.isMostNotable === undefined ) {
+						if ( ranges[i].isMostNotable ) {
+							ranges[i].emit("mostNotable");
+						} else {
+							ranges[i].emit("notMostNotable");
+						}
+					} else
+					if ( currentState.isMostNotable !== ranges[i].isMostNotable ) {
+						if ( ranges[i].isMostNotable ) {
+							ranges[i].emit("mostNotable");
+						} else {
+							ranges[i].emit("notMostNotable");
+						}
+					}
+					
 				}
-				ranges[mostNotableIndex].isMostNotable = true;
+				
 				
 				// RANGES
 			}
@@ -168,6 +217,9 @@ class ScrollingAnchors {
 			
 			return true;
 		} catch(e) {
+			console.log(event);
+			console.log(label);
+			console.log(which);
 			console.log(e);
 			console.log("parse error. maybe incorrectly stated the name");
 		}
