@@ -91,7 +91,7 @@
 
 #### События для anchors
 1. `onTheScreen` - Вызывается один раз при появлении anchor в области видимости.
-2. `notOnTheScreen` - Вызывается один раз при искрытии anchor с области видимости.
+2. `notOnTheScreen` - Вызывается один раз при скрытии anchor из области видимости.
 	```
 		scrollingAnchors.on("onTheScreen:anchors:Equipment", function() {
 			console.log("Last Anchor on Screen!");
