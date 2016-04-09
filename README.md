@@ -82,6 +82,7 @@
 			console.log("Equipment-Characteristics Ranges on Screen!");
 		});
 	```
+	
 2. @addListeners( handler ) - Принимает функцию которая будет вызываться каждый раз при событии onScroll.
 	```
 		scrollingAnchors.addListeners( ( data ) => {
