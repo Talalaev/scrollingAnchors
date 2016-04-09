@@ -8,72 +8,70 @@
 `anchor` должен содержать jQuery объект с html узлом нутри. Массив диапазонов похож на массив якорей в массиве должны лежать объекты с двумя обязательными 
 полями `name` и `range`. `range` содержит массив из двух jQuery объектов с html узлом внутри, первый узел в массиве range тот который находится выше по документу 
 (`offsetTop` меньше).
-
-	```
-		var anchors = [
-				{
-					name: "Home",
-					anchor: $("#Home")
-				},
-				{
-					name: "Main_functions",
-					anchor: $("#Main_functions")
-				},
-				{
-					name: "Equipment",
-					anchor: $("#Equipment")
-				},
-				{
-					name: "Characteristics",
-					anchor: $("#Characteristics")
-				},
-				{
-					name: "Features",
-					anchor: $("#Features")
-				},
-				{
-					name: "Reviews",
-					anchor: $("#Reviews")
-				},
-				{
-					name: "EndDoc",
-					anchor: $("#EndDoc")
-				}
-			];
-		var ranges = [
-				{
-					name: "Home-Main_functions",
-					range: [$("#Home"),$("#Main_functions")]
-				},
-				{
-					name: "Main_functions-Equipment",
-					range: [$("#Main_functions"),$("#Equipment")]
-				},
-				{
-					name: "Equipment-Characteristics",
-					range: [$("#Equipment"),$("#Characteristics")]
-				},
-				{
-					name: "Characteristics-Features",
-					range: [$("#Characteristics"),$("#Features")]
-				},
-				{
-					name: "Features-Reviews",
-					range: [$("#Features"),$("#Reviews")]
-				},
-				{
-					name: "Reviews-EndDoc",
-					range: [$("#Reviews"),$("#EndDoc")]
-				}
-			];
-
+```
+	var anchors = [
+			{
+				name: "Home",
+				anchor: $("#Home")
+			},
+			{
+				name: "Main_functions",
+				anchor: $("#Main_functions")
+			},
+			{
+				name: "Equipment",
+				anchor: $("#Equipment")
+			},
+			{
+				name: "Characteristics",
+				anchor: $("#Characteristics")
+			},
+			{
+				name: "Features",
+				anchor: $("#Features")
+			},
+			{
+				name: "Reviews",
+				anchor: $("#Reviews")
+			},
+			{
+				name: "EndDoc",
+				anchor: $("#EndDoc")
+			}
+		];
+	var ranges = [
+			{
+				name: "Home-Main_functions",
+				range: [$("#Home"),$("#Main_functions")]
+			},
+			{
+				name: "Main_functions-Equipment",
+				range: [$("#Main_functions"),$("#Equipment")]
+			},
+			{
+				name: "Equipment-Characteristics",
+				range: [$("#Equipment"),$("#Characteristics")]
+			},
+			{
+				name: "Characteristics-Features",
+				range: [$("#Characteristics"),$("#Features")]
+			},
+			{
+				name: "Features-Reviews",
+				range: [$("#Features"),$("#Reviews")]
+			},
+			{
+				name: "Reviews-EndDoc",
+				range: [$("#Reviews"),$("#EndDoc")]
+			}
+		];
 			
-		const ScrollingAnchors = require('./ScrollingAnchors');
-		const scrollingAnchors = new ScrollingAnchors({
-			anchors,
-			ranges
-		});
-	```
+	const ScrollingAnchors = require('./ScrollingAnchors');
+	const scrollingAnchors = new ScrollingAnchors({
+		anchors,
+		ranges
+	});
+```
 
 #### Методы
 1. super.on(event, handler) - Подписка на событие (метод класса). Первый аргумент event тип строка 
