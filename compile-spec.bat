@@ -1,1 +1,0 @@
-webpack && node node_modules/babel-cli/bin/babel bundle.js -o spec-compiled.js

@@ -1,4 +1,4 @@
-const EventEmitter = require('./EventEmitter');
+const EventEmitter = require('../EventEmitter');
 
 class ScrollingAnchors {
     constructor( options ) {

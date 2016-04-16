@@ -1,22 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+﻿<!DOCTYPE html>
+<html lang="ru">
 <head>
 
     <title>Demo Scrolling Anchors!!</title>
 
 
-    <link rel="stylesheet" type="text/css" href="jasmine/jasmine.css">
+    <link rel="stylesheet" type="text/css" href="../jasmine/jasmine.css">
 	
-	<script type="text/javascript" src="jQuery.js"></script>
+	<script type="text/javascript" src="../lib/jQuery.js"></script>
 	
 	
 	<style>
 		.space {
+			background: #eee none repeat scroll 0 0;
+			color: #6f6f6c;
 			display: block;
+			font-size: 80px;
 			height: 300px;
-			background: #eee;
 			margin-top: 5px;
+			text-shadow: 2px 4px 8px #6f6f6f;
+		}
+		#console {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 300px;
+			background: #fff;
+		}
+		#Equipment-Characteristics {
+			background: #ffff00;
 		}
 	</style>
 
@@ -34,7 +47,7 @@
 	
 	<div id="Equipment"></div>
 	
-	<div class="space">Equipment-Characteristics</div>
+	<div class="space" id="Equipment-Characteristics">Equipment-Characteristics</div>
 	
 	<div id="Characteristics"></div>
 	
@@ -49,6 +62,18 @@
 	<div class="space">Reviews-EndDoc</div>
 	
 	<div id="EndDoc"></div>
+	
+	<div id="console">
+		<div class="range-name">
+			Отслеживаем: "Equipment-Characteristics"
+		</div>
+		<p>Состояние (State):</p>
+		<ul>
+			<li>На экране: <span class="on-screen"></span></li>
+			<li>Самый заметный: <span class="most-notable"></span></li>
+			<li>Позиция: <span class="position"></span></li>
+		</ul>
+	</div>
     
 	<script type="text/javascript">
 		/*
@@ -85,7 +110,8 @@
 		*/
 	</script>
 	
-	<script type="text/javascript" src="spec-compiled.js"></script>
+	<script type="text/javascript" src="../dist/scrollingAnchors.js"></script>
+	<script type="text/javascript" src="default.js"></script>
 
 </body>
 </html>
