@@ -109,7 +109,7 @@ myModule.on("notMostNotable:ranges:Equipment-Characteristics", function() {
 
 
 myModule.addListeners(function( data ) {
-	console.log( data.mostNotableIndex );
+	console.log( data );
 });
 
 
