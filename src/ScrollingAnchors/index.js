@@ -145,15 +145,10 @@ class ScrollingAnchors {
 				}
 				
 				for ( var i = 0; i < ranges.length; i++ ) {
-					//ranges[i].isMostNotablePrev = ranges[i].isMostNotable;
-					//ranges[i].isMostNotable = false;
-					
 					if ( saveSize < ranges[i].visiblePart ) {
 						saveSize = ranges[i].visiblePart;
 						mostNotableIndex = i;
-						//ranges[mostNotableIndex].isMostNotable = true;
 					}
-					
 				}
 				for ( var i = 0; i < ranges.length; i++ ) {
 					if ( i == mostNotableIndex) continue;
