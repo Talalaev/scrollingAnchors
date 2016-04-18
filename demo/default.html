@@ -27,6 +27,7 @@
 			bottom: 0;
 			width: 300px;
 			background: #fff;
+			padding-left: 10px;
 		}
 		#Equipment-Characteristics {
 			background: #ffff00;
@@ -39,6 +40,19 @@
 		}
 		.indicator {
 			font-size: 20px
+		}
+		
+		.data {
+			padding: 10px;
+		}
+		.data.Home-Main_functions {
+			border-left: 4px solid #80e680;
+		}
+		.data.Equipment-Characteristics {
+			border-left: 4px solid #ffff00;
+		}
+		.data.Features-Reviews {
+			border-left: 4px solid #9f9fee;
 		}
 	</style>
 
@@ -73,24 +87,30 @@
 	<div id="EndDoc"></div>
 	
 	<div id="console">
-		<p>Состояние "Home-Main_functions":</p>
-		<ul>
-			<li>На экране: <span class="on-screen Home-Main_functions indicator"></span></li>
-			<li>Самый заметный: <span class="most-notable Home-Main_functions indicator"></span></li>
-			<li>Позиция: <span class="position Home-Main_functions indicator"></span></li>
-		</ul>
-		<p>Состояние "Equipment-Characteristics":</p>
-		<ul>
-			<li>На экране: <span class="on-screen Equipment-Characteristics indicator"></span></li>
-			<li>Самый заметный: <span class="most-notable Equipment-Characteristics indicator"></span></li>
-			<li>Позиция: <span class="position Equipment-Characteristics indicator"></span></li>
-		</ul>
-		<p>Состояние "Features-Reviews":</p>
-		<ul>
-			<li>На экране: <span class="on-screen Features-Reviews indicator"></span></li>
-			<li>Самый заметный: <span class="most-notable Features-Reviews indicator"></span></li>
-			<li>Позиция: <span class="position Features-Reviews indicator"></span></li>
-		</ul>
+		<div class="data Home-Main_functions">
+			<p>Состояние "Home-Main_functions":</p>
+			<ul>
+				<li>На экране: <span class="on-screen Home-Main_functions indicator"></span></li>
+				<li>Самый заметный: <span class="most-notable Home-Main_functions indicator"></span></li>
+				<li>Позиция: <span class="position Home-Main_functions indicator"></span></li>
+			</ul>
+		</div>
+		<div class="data Equipment-Characteristics">
+			<p>Состояние "Equipment-Characteristics":</p>
+			<ul>
+				<li>На экране: <span class="on-screen Equipment-Characteristics indicator"></span></li>
+				<li>Самый заметный: <span class="most-notable Equipment-Characteristics indicator"></span></li>
+				<li>Позиция: <span class="position Equipment-Characteristics indicator"></span></li>
+			</ul>
+		</div>
+		<div class="data Features-Reviews">
+			<p>Состояние "Features-Reviews":</p>
+			<ul>
+				<li>На экране: <span class="on-screen Features-Reviews indicator"></span></li>
+				<li>Самый заметный: <span class="most-notable Features-Reviews indicator"></span></li>
+				<li>Позиция: <span class="position Features-Reviews indicator"></span></li>
+			</ul>
+		</div>
 	</div>
     
 	<script type="text/javascript">
