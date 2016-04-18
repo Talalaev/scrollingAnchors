@@ -31,6 +31,12 @@
 		#Equipment-Characteristics {
 			background: #ffff00;
 		}
+		#Home-Main_functions {
+			background: #80e680;
+		}
+		#Features-Reviews {
+			background: #9f9fee;
+		}
 		.indicator {
 			font-size: 20px
 		}
@@ -42,7 +48,7 @@
 <body>
 	<div id="Home"></div>
 	
-	<div class="space">Home-Main_functions</div>
+	<div class="space" id="Home-Main_functions">Home-Main_functions</div>
 	
 	<div id="Main_functions"></div>
 	
@@ -58,7 +64,7 @@
 	
 	<div id="Features"></div>
 	
-	<div class="space">Features-Reviews</div>
+	<div class="space" id="Features-Reviews">Features-Reviews</div>
 	
 	<div id="Reviews"></div>
 	
@@ -67,14 +73,23 @@
 	<div id="EndDoc"></div>
 	
 	<div id="console">
-		<div class="range-name">
-			Отслеживаем: "Equipment-Characteristics"
-		</div>
-		<p>Состояние (State):</p>
+		<p>Состояние "Home-Main_functions":</p>
 		<ul>
-			<li>На экране: <span class="on-screen indicator"></span></li>
-			<li>Самый заметный: <span class="most-notable indicator"></span></li>
-			<li>Позиция: <span class="position indicator"></span></li>
+			<li>На экране: <span class="on-screen Home-Main_functions indicator"></span></li>
+			<li>Самый заметный: <span class="most-notable Home-Main_functions indicator"></span></li>
+			<li>Позиция: <span class="position Home-Main_functions indicator"></span></li>
+		</ul>
+		<p>Состояние "Equipment-Characteristics":</p>
+		<ul>
+			<li>На экране: <span class="on-screen Equipment-Characteristics indicator"></span></li>
+			<li>Самый заметный: <span class="most-notable Equipment-Characteristics indicator"></span></li>
+			<li>Позиция: <span class="position Equipment-Characteristics indicator"></span></li>
+		</ul>
+		<p>Состояние "Features-Reviews":</p>
+		<ul>
+			<li>На экране: <span class="on-screen Features-Reviews indicator"></span></li>
+			<li>Самый заметный: <span class="most-notable Features-Reviews indicator"></span></li>
+			<li>Позиция: <span class="position Features-Reviews indicator"></span></li>
 		</ul>
 	</div>
     
