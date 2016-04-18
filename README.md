@@ -69,9 +69,11 @@
 	const ScrollingAnchors = require('./ScrollingAnchors');
 	const scrollingAnchors = new ScrollingAnchors({
 		anchors,
-		ranges
+		ranges,
+		parent: window
 	});
 ```
+Так же конструктор принимает ссылку на dom родительский dom узел. По умолчанию `parent` равен window, но вы можете передать любой dom узел на свое усмотрение.
 
 #### Методы
 1. `super.on(event, handler)` - Подписка на событие (метод класса). Первый аргумент event тип строка 
