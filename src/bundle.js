@@ -113,12 +113,12 @@ var ScrollingAnchors =
 						// ANCHORS
 						if (ScrollingAnchors.coordsOnScreen(parent, anchors[i].coords)) {
 							if ( !anchors[i].onScreen )
-								anchors[i].emit("onTheScreen");
+								anchors[i].emit("onTheScreen", [anchors[i]]);
 							anchors[i].onScreen = true;
 							
 						} else {
 							if ( anchors[i].onScreen )
-								anchors[i].emit("notOnTheScreen");
+								anchors[i].emit("notOnTheScreen", [anchors[i]]);
 							anchors[i].onScreen = false;
 							
 						}
@@ -152,7 +152,7 @@ var ScrollingAnchors =
 						if( ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.bottom) && ScrollingAnchors.coordsOnScreen(parent, ranges[i].coords.top) ) {
 							ranges[i].position = "middle";
 							ranges[i].onScreen = true;
-							ranges[i].visiblePart = ranges[i].coords.top + ranges[i].coords.bottom;
+							ranges[i].visiblePart = ranges[i].coords.bottom - ranges[i].coords.top;
 						}
 						if( ScrollingAnchors.rangeLargerThanScreen(parent, ranges[i].coords) ) {
 							ranges[i].position = "cover";
@@ -169,38 +169,33 @@ var ScrollingAnchors =
 						// emit events
 						if ( currentState.onScreen === undefined ) {
 							if ( ranges[i].onScreen ) {
-								ranges[i].emit("onTheScreen");
+								ranges[i].emit("onTheScreen", [ranges[i]]);
 							} else {
-								ranges[i].emit("notOnTheScreen");
+								ranges[i].emit("notOnTheScreen", [ranges[i]]);
 							}
 						} else
 						if ( currentState.onScreen !== ranges[i].onScreen ) {
 							if ( ranges[i].onScreen ) {
-								ranges[i].emit("onTheScreen");
+								ranges[i].emit("onTheScreen", [ranges[i]]);
 							} else {
-								ranges[i].emit("notOnTheScreen");
+								ranges[i].emit("notOnTheScreen", [ranges[i]]);
 							}
 						}
 						
 						if ( currentState.position === undefined ) {
-							ranges[i].emit( ranges[i].position );
+							ranges[i].emit( ranges[i].position, [ranges[i]] );
 						} else
 						if ( currentState.position !== ranges[i].position ) {
-							ranges[i].emit( ranges[i].position );
+							ranges[i].emit( ranges[i].position, [ranges[i]] );
 						}
 							
 					}
 					
 					for ( var i = 0; i < ranges.length; i++ ) {
-						//ranges[i].isMostNotablePrev = ranges[i].isMostNotable;
-						//ranges[i].isMostNotable = false;
-						
 						if ( saveSize < ranges[i].visiblePart ) {
 							saveSize = ranges[i].visiblePart;
 							mostNotableIndex = i;
-							//ranges[mostNotableIndex].isMostNotable = true;
 						}
-						
 					}
 					for ( var i = 0; i < ranges.length; i++ ) {
 						if ( i == mostNotableIndex) continue;
@@ -216,16 +211,16 @@ var ScrollingAnchors =
 						// emit event
 						if ( ranges[i].isMostNotablePrev === undefined ) {
 							if ( ranges[i].isMostNotable ) {
-								ranges[i].emit("mostNotable");
+								ranges[i].emit("mostNotable", [ranges[i]]);
 							} else {
-								ranges[i].emit("notMostNotable");
+								ranges[i].emit("notMostNotable", [ranges[i]]);
 							}
 						} else
 						if ( ranges[i].isMostNotablePrev !== ranges[i].isMostNotable ) {
 							if ( ranges[i].isMostNotable ) {
-								ranges[i].emit("mostNotable");
+								ranges[i].emit("mostNotable", [ranges[i]]);
 							} else {
-								ranges[i].emit("notMostNotable");
+								ranges[i].emit("notMostNotable", [ranges[i]]);
 							}
 						}
 						
