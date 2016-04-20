@@ -92,7 +92,7 @@ myModule.on("middle:ranges:Equipment-Characteristics", function( data ) {
 });
 
 myModule.on("cover:ranges:Equipment-Characteristics", function( data ) {
-	console.log("Equipment-Characteristics Ranges Top!");
+	console.log("Equipment-Characteristics Ranges Cover!");
 	$(".Equipment-Characteristics.position").html("cover");
 	$(".visiblePart.Equipment-Characteristics").html(data.visiblePart);
 });
