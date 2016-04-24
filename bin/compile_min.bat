@@ -1,0 +1,1 @@
+webpack && node ../node_modules/babel-cli/bin/babel ../src/bundle.js -o ../dist/scrollingAnchors.min.js

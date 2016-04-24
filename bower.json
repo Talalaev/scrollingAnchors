@@ -1,0 +1,27 @@
+{
+  "name": "scrollingAnchors",
+  "description": "позволяет отследить появление элементов при прокрутке страницы, а так же другие события и отреагировать на них",
+  "main": "dist/scrollingAnchors.min.js",
+  "authors": [
+    "Mike"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "scroll page",
+    "scrolling page",
+	"react to scrolling",
+	"scroll and animate"
+  ],
+  "homepage": "https://github.com/Talalaev/scrollingAnchors",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.9.1"
+  }
+}
